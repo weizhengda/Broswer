@@ -46,3 +46,54 @@ Firefox中没有removenode方法。node.parentNode.removeChild(node)
 .addEventListener      //     .removeEventListener
 Ie8以及以下：
 .attachEvent          //     .detachEvent
+
+
+6. 手机端如何解决兼容问题？如何优化？
+
+* H5页面窗口自动调整到设备宽度，并禁止用户缩放页面
+
+```html
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+
+
+（部分安卓手机的UC浏览器写完以后还是可以放大缩小）
+
+忽略将页面中的数字识别为电话号码
+
+
+<meta name="format-detection" content="telephone=no" />（ios上会明显 有时候会把数字当成电话号码）
+忽略Android平台中对邮箱地址的识别
+
+<meta name="format-detection" content="email=no" />
+viewport模板
+
+<meta charset="utf-8">
+
+<meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">//主要I是强制让文档的宽度与设备宽度保持1:1，最大宽度1.0，禁止屏幕缩放。
+
+<meta content="yes" name="apple-mobile-web-app-capable">//这个也是iphone私有标签，允许全屏浏览。
+
+<meta content="black" name="apple-mobile-web-app-status-bar-style">//iphone的私有标签，iphone顶端状态条的样式。
+
+<meta content="telephone=no" name="format-detection">//禁止数字自动识别为电话号码，这个比较有用，因为一串数字在iphone上会显示成蓝色，样式加成别的颜色也是不生效的。
+
+<meta content="email=no" name="format-detection">
+
+```
+ 
+* webkit表单元素的默认外观怎么重置
+
+```css
+
+.css{-webkit-appearance:none;}  （ios上的下拉框会有圆角，所以要写border-radius:0）
+
+```
+
+ 
+* 在input框获得焦点时文字被清空用value 在input框输入文字时被清空用placeholder
+
+ 
+* webkit表单输入框placeholder的文字能换行么？ios可以，android不行~,在textarea标签下都可以换行~
+
+
